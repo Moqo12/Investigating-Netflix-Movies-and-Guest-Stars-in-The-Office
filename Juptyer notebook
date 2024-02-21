@@ -1,0 +1,75 @@
+years = [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
+durations = [103, 101, 99, 100, 100, 95, 95, 96, 93, 90]
+
+movie_dict = {'years': years, 'durations': durations}
+
+# Print the dictionary
+print(movie_dict)
+
+import pandas as pd
+
+durations_df = pd.DataFrame(movie_dict)
+print(durations_df)
+
+#Visual inspection of the Data
+
+import matplotlib.pyplot as plt
+
+fig = plt.figure()
+
+plt.plot(years,durations)
+
+plt.title("Netflix Movie Durations 2011-2020")
+
+plt.show()
+# Loading the Data in from Github
+netflix_df = pd.read_csv("https://raw.githubusercontent.com/qanhnn12/Investigating-Netflix-Movies-and-Guest-Stars-in-The-Office/main/guided_project/datasets/netflix_data.csv")
+
+netflix_df[:5]
+# Filtering out TV shows, so only movies are left
+netflix_movies_only = netflix_df[netflix_df['type'] == "Movie"]
+
+# Selecting only columns of interest and creating the scatter plot
+netflix_movies_col_subset = netflix_movies_only[["title","country", "genre","release_year", "duration"]]
+
+netflix_movies_col_subset[0:5]
+
+#Create a scatter plot of duration versus release_year
+fig = plt.figure(figsize=(12,8))
+plt.scatter(netflix_movies_col_subset["release_year"], netflix_movies_col_subset["duration"])
+plt.title("Movie duration by Year of Release")
+plt.show
+
+# Filtering out movies with duration shorter than 60 mins
+short_movies = netflix_movies_col_subset[netflix_movies_col_subset["duration"]< 60]
+short_movies[0:20]
+# films under 60 min seemed to be Children,Stand-Up and Documentaries
+# lets mark them in a different colour
+
+# Define an empty list
+colors = []
+
+# Iterate over rows of netflix_movies_col_subset
+for lab, row in netflix_movies_col_subset.iterrows():
+  if row["genre"] == "Children":
+    colors.append("red")
+  elif row["genre"] == "Documentaries":
+    colors.append("blue")
+  elif row["genre"] == "Stand-Up":
+    colors.append("green")
+  else:
+    colors.append("black")
+
+colors[0:10]
+
+#Set the figure style and initalize a new figure
+plt.style.use("fivethirtyeight")
+fig = plt.figure(figsize=(12,8))
+
+#Create a scatter plot of duration versus release_year
+plt.scatter(netflix_movies_col_subset["release_year"],netflix_movies_col_subset["duration"], c = colors)
+plt.title("Movie duration by year of release")
+plt.xlabel("Release year")
+plt.ylabel("Movie duration in minutes")
+
+plt.show()

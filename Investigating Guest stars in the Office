@@ -1,0 +1,35 @@
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+office_df = pd.read_csv("https://raw.githubusercontent.com/qanhnn12/Investigating-Netflix-Movies-and-Guest-Stars-in-The-Office/main/unguided_project/datasets/office_episodes.csv")
+office_df.head()
+
+colors = []
+for lab, row in office_df.iterrows():
+  if row["scaled_ratings"] < 0.25:
+    colors.append("red")
+  elif  0.25 <= row["scaled_ratings"] < 0.50:
+    colors.append("orange")
+  elif  0.50 <= row["scaled_ratings"] < 0.75:
+    colors.append("lightgreen")
+  else:
+    colors.append("darkgreen")
+
+colors[:10]
+
+
+sizes = []
+
+for lab, row in office_df.iterrows():
+  if row["has_guests"] == True:
+    sizes.append(250)
+  else:
+    sizes.append(25)
+
+fig = plt.figure(figsize=(12,8))
+plt.scatter(office_df["episode_number"],office_df["viewership_mil"], c = colors, s = sizes)
+plt.title("Popularity,Quality and Guest Appearences on the Office")
+plt.xlabel("Episode Number")
+plt.ylabel("Viewership(Millions)")
+plt.show

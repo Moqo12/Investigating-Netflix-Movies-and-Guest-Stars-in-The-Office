@@ -23,7 +23,7 @@ plt.title("Netflix Movie Durations 2011-2020")
 
 plt.show()
 # Loading the Data in from Github
-netflix_df = pd.read_csv("https://raw.githubusercontent.com/qanhnn12/Investigating-Netflix-Movies-and-Guest-Stars-in-The-Office/main/guided_project/datasets/netflix_data.csv")
+netflix_df = pd.read_csv("https://raw.githubusercontent.com/Moqo12/Investigating-Netflix-Movies-and-Guest-Stars-in-The-Office/main/netflix_data.csv")
 
 netflix_df[:5]
 # Filtering out TV shows, so only movies are left

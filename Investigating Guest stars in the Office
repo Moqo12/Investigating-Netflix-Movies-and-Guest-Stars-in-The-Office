@@ -2,7 +2,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-office_df = pd.read_csv("https://raw.githubusercontent.com/qanhnn12/Investigating-Netflix-Movies-and-Guest-Stars-in-The-Office/main/unguided_project/datasets/office_episodes.csv")
+office_df = pd.read_csv("https://raw.githubusercontent.com/Moqo12/Investigating-Netflix-Movies-and-Guest-Stars-in-The-Office/main/office_episodes.csv")
 office_df.head()
 
 colors = []
